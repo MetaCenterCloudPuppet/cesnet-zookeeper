@@ -1,0 +1,16 @@
+{
+  "name": "cesnet-zookeeper",
+  "version": "0.1.0",
+  "author": "CESNET",
+  "summary": "Zookeeper cluster with security",
+  "license": "Apache 2.0",
+  "source": "http://scientific.zcu.cz/git/cesnet-zookeeper.git",
+  "project_page": "https://github.com/CESNET/",
+  "issues_url": "mailto://valtri@civ.zcu.cz",
+  "dependencies": [
+    {
+      "name": "puppetlabs-stdlib",
+      "version_range": ">= 1.0.0"
+    }
+  ]
+}
