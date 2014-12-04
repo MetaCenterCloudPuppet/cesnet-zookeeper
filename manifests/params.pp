@@ -26,6 +26,4 @@ class zookeeper::params {
 
   $features = {
   }
-
-  $perform = false
 }

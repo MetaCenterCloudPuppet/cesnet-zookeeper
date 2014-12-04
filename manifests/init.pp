@@ -7,12 +7,8 @@
 # [*hostnames*] (nil)
 #   Array of zookeeper nodes hostnames.
 #
-# [*perform*] (false)
-#   Launch all installation and setup here, from zookepper class.
-#
 class zookeeper (
   $hostnames = $params::hostnames,
-  $perform = $params::perform,
 ) inherits zookeeper::params {
   if $zookeeper::perform {
     include 'zookeeper::install'
