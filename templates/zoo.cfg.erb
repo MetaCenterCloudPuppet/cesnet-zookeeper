@@ -11,11 +11,25 @@ syncLimit=5
 dataDir=<%= scope.lookupvar('zookeeper::datadir') %>
 # the port at which the clients will connect
 clientPort=2181
-<% i=1 -%>
+<% if scope.lookupvar('zookeeper::realm') and not scope.lookupvar('zookeeper::realm').empty? -%>
+# security
+authProvider.1=org.apache.zookeeper.server.auth.SASLAuthenticationProvider
+jaasLoginRenew=3600000
+kerberos.removeHostFromPrincipal=true
+kerberos.removeRealmFromPrincipal=true
+<% end -%>
 <% zh = scope.lookupvar('zookeeper::hostnames') -%>
+<% i=1 -%>
 <% if zh != nil and zh != :undef -%>
 <% scope.lookupvar('zookeeper::hostnames').each do |h| -%>
 server.<%= i %>=<%= h %>:2888:3888
 <% i=i+1 -%>
+<% end -%>
+<% if scope.lookupvar('zookeeper::realm') and not scope.lookupvar('zookeeper::realm').empty? -%>
+<% i=1 -%>
+<% scope.lookupvar('zookeeper::hostnames').each do |h| -%>
+authProvider.<%= i -%>=org.apache.zookeeper.server.auth.SASLAuthenticationProvider
+<% i=i+1 -%>
+<% end -%>
 <% end -%>
 <% end -%>

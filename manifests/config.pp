@@ -18,6 +18,37 @@ class zookeeper::config {
     alias => 'zoo-cfg',
   }
 
+  $keytab = '/etc/security/keytab/zookeeper.service.keytab'
+  $principal = "zookeeper/${::fqdn}@${zookeeper::realm}"
+
+  if $zookeeper::realm {
+    file { $keytab:
+      owner => 'zookeeper',
+      group => 'zookeeper',
+      mode  => '0400',
+    }
+
+    $ensure_realm = 'present'
+  } else {
+    $ensure_realm = 'absent'
+  }
+
+  file { "${zookeeper::confdir}/jaas.conf":
+    ensure  => $ensure_realm,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => template('zookeeper/jaas.conf.erb'),
+  }
+
+  file { "${zookeeper::confdir}/java.env":
+    ensure  => $ensure_realm,
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
+    content => template('zookeeper/java.env.erb'),
+  }
+
   case "${::osfamily}" {
     'RedHat': {
       if $myid {
@@ -41,7 +72,12 @@ class zookeeper::config {
         creates => "${zookeeper::datadir}/version-2",
         path    => '/sbin:/usr/sbin:/bin:/usr/bin',
         user    => 'zookeeper',
-        require => File['zoo-cfg'],
+        require => [ File['zoo-cfg'], ],
+      }
+      if $zookeeper::realm {
+        File[$keytab] -> Exec['zookeeper-init']
+        File["${zookeeper::confdir}/jaas.conf"] -> Exec['zookeeper-init']
+        File["${zookeeper::confdir}/java.env"] -> Exec['zookeeper-init']
       }
     }
   }
