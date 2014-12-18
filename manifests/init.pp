@@ -9,6 +9,9 @@
 #
 # [*realm*] (required)
 #   Kerberos realm. Required parameter, empty string disables Kerberos authentication.
+#   To enable security, there are required:
+#   * configured Kerberos (/etc/krb5.conf, /etc/krb5.keytab)
+#   * /etc/security/keytab/zookeeper.service.keytab (on zookeeper nodes)
 #
 class zookeeper (
   $hostnames = $params::hostnames,
