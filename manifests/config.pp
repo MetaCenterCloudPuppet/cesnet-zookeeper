@@ -1,3 +1,7 @@
+# == Class: zookeeper::config
+#
+# Zookeeper configuration.
+#
 class zookeeper::config {
   if $zookeeper::hostnames {
     $myid = array_search($zookeeper::hostnames, $::fqdn)
@@ -7,15 +11,15 @@ class zookeeper::config {
   notice("myid: ${myid}")
 
   if !$myid {
-    notice("Missing myid! Zookeeper server $::fqdn not in zookeeper::hostnames list.")
+    notice("Missing myid! Zookeeper server ${::fqdn} not in zookeeper::hostnames list.")
   }
 
   file { "${zookeeper::confdir}/zoo.cfg":
-    owner => 'root',
-    group => 'root',
-    mode  => '0644',
+    owner   => 'root',
+    group   => 'root',
+    mode    => '0644',
     content => template('zookeeper/zoo.cfg.erb'),
-    alias => 'zoo-cfg',
+    alias   => 'zoo-cfg',
   }
 
   $keytab = '/etc/security/keytab/zookeeper.service.keytab'
@@ -49,15 +53,15 @@ class zookeeper::config {
     content => template('zookeeper/java.env.erb'),
   }
 
-  case "${::osfamily}" {
-    'RedHat': {
+  case $::osfamily {
+    'RedHat',default: {
       if $myid {
         file { "${zookeeper::datadir}/myid":
           owner   => 'zookeeper',
           group   => 'zookeeper',
           mode    => '0644',
           replace => false,
-          content => "${myid}",
+          content => $myid,
         }
       }
     }
@@ -65,9 +69,9 @@ class zookeeper::config {
       if $myid {
         $args = "--myid ${myid}"
       } else {
-        $args = ""
+        $args = ''
       }
-      exec { "zookeeper-init":
+      exec { 'zookeeper-init':
         command => "zookeeper-server-initialize ${args}",
         creates => "${zookeeper::datadir}/version-2",
         path    => '/sbin:/usr/sbin:/bin:/usr/bin',

@@ -4,7 +4,7 @@
 # It sets variables according to platform.
 #
 class zookeeper::params {
-  case "${::osfamily}" {
+  case $::osfamily {
     'RedHat': {
       $packages = [ 'zookeeper' ]
       $daemon = 'zookeeper'
