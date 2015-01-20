@@ -6,12 +6,14 @@
 class zookeeper::params {
   case $::osfamily {
     'RedHat': {
+      $alternatives = undef
       $packages = [ 'zookeeper' ]
       $daemon = 'zookeeper'
       $confdir = '/etc/zookeeper'
       $datadir = '/var/lib/zookeeper/data'
     }
     'Debian': {
+      $alternatives = 'cluster'
       $packages = [ 'zookeeper-server' ]
       $daemon = 'zookeeper-server'
       $confdir = '/etc/zookeeper/conf'
