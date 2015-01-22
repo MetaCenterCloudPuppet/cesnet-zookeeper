@@ -12,7 +12,7 @@ class zookeeper::install {
   if $confname {
     exec { 'zookeeper-copy-config':
       command => "cp -a ${zookeeper::confdir}/ /etc/zookeeper/conf.${confname}",
-      path    => $path,
+      path    => '/sbin:/usr/sbin:/bin:/usr/bin',
       creates => "/etc/zookeeper/conf.${confname}",
     }
     ->

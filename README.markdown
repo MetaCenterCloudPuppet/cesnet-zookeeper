@@ -47,6 +47,9 @@ Supported are:
  * */etc/zookeeper/conf\**
  * */var/lib/zookeeper/\**
 * Secret files (keytab): ownerships and permissions modified
+* Java system properties set for Zookeeper:
+ * *java.security.auth.login.config*
+ * *zookeeper.security.auth\_to\_local*
 
 <a name="setup-requirements"></a>
 ###Setup Requirements
@@ -82,6 +85,14 @@ It is recommended to have at least three or more (odd-numbered) zookeeper machin
     }
 
 The keytab file must be available at */etc/security/keytabs/zookeeper.service.keytab*.
+
+Note: you can consider removing or changing property *zookeeper.security.auth\_to\_local*:
+
+    properties => {
+      'zookeeper.security.auth_to_local' => '::undef',
+    }
+
+Default value is valid for principal names according to Hadoop documentation at [http://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SecureMode.html](http://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SecureMode.html) and it is needed only with cross-realm authentication.
 
 <a name="reference"></a>
 ##Reference

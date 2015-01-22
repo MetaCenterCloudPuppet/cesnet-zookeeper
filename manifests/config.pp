@@ -32,25 +32,30 @@ class zookeeper::config {
       mode  => '0400',
     }
 
-    $ensure_realm = 'present'
+    file { "${zookeeper::confdir}/jaas.conf":
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0644',
+      content => template('zookeeper/jaas.conf.erb'),
+    }
   } else {
-    $ensure_realm = 'absent'
+    file { "${zookeeper::confdir}/jaas.conf":
+      ensure => 'absent',
+    }
   }
 
-  file { "${zookeeper::confdir}/jaas.conf":
-    ensure  => $ensure_realm,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
-    content => template('zookeeper/jaas.conf.erb'),
-  }
-
-  file { "${zookeeper::confdir}/java.env":
-    ensure  => $ensure_realm,
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
-    content => template('zookeeper/java.env.erb'),
+  if $zookeeper::_properties {
+    file { "${zookeeper::confdir}/java.env":
+      ensure  => 'present',
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0644',
+      content => template('zookeeper/java.env.erb'),
+    }
+  } else {
+    file { "${zookeeper::confdir}/java.env":
+      ensure => 'absent',
+    }
   }
 
   case $::osfamily {
