@@ -1,6 +1,6 @@
 {
   "name": "cesnet-zookeeper",
-  "version": "0.9.3",
+  "version": "0.9.4",
   "author": "Frantisek Dvorak <valtri@civ.zcu.cz>",
   "summary": "Zookeeper cluster with security",
   "license": "MIT",
