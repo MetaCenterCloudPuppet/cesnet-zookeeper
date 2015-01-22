@@ -1,7 +1,7 @@
 {
   "name": "cesnet-zookeeper",
   "version": "0.9.3",
-  "author": "František Dvořák <valtri@civ.zcu.cz>",
+  "author": "Frantisek Dvorak <valtri@civ.zcu.cz>",
   "summary": "Zookeeper cluster with security",
   "license": "MIT",
   "source": "https://github.com/MetaCenterCloudPuppet/cesnet-zookeeper",
