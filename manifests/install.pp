@@ -26,6 +26,6 @@ class zookeeper::install {
       path => "/etc/zookeeper/conf.${confname}",
     }
 
-    Package[$zookeeper::packages] -> Alternatives['zookeeper-conf']
+    Package[$zookeeper::packages] -> Exec['zookeeper-copy-config']
   }
 }
