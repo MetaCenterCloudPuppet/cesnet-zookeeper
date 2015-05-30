@@ -10,7 +10,7 @@ class zookeeper::config {
   }
   notice("myid: ${myid}")
 
-  if !$myid {
+  if !$myid or $myid == 0 {
     notice("Missing myid! Zookeeper server ${::fqdn} not in zookeeper::hostnames list.")
   }
 
@@ -60,18 +60,21 @@ class zookeeper::config {
 
   case $::osfamily {
     'RedHat',default: {
-      if $myid {
+      if $myid and $myid != 0 {
         file { "${zookeeper::datadir}/myid":
           owner   => 'zookeeper',
           group   => 'zookeeper',
           mode    => '0644',
           replace => false,
-          content => $myid,
+          # lint:ignore:only_variable_string
+          # (needed to convert integer to string)
+          content => "${myid}",
+          # lint:endignore
         }
       }
     }
     'Debian': {
-      if $myid {
+      if $myid and $myid != 0 {
         $args = "--myid ${myid}"
       } else {
         $args = ''
