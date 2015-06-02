@@ -10,22 +10,34 @@
   "tags": ["hadoop", "zookeeper"],
   "operatingsystem_support": [
     {
-    "operatingsystem": "Debian",
-    "operatingsystemrelease": ["7"]
+      "operatingsystem": "CentOS",
+      "operatingsystemrelease": ["6"]
     },
     {
-    "operatingsystem": "Ubuntu",
-    "operatingsystemrelease": ["14.04"]
+      "operatingsystem": "Debian",
+      "operatingsystemrelease": ["7"]
+    },
+    {
+      "operatingsystem": "RedHat",
+      "operatingsystemrelease": ["6"]
+    },
+    {
+      "operatingsystem": "Scientific",
+      "operatingsystemrelease": ["6"]
+    },
+    {
+      "operatingsystem": "Ubuntu",
+      "operatingsystemrelease": ["14.04"]
     }
   ],
   "requirements": [
     {
       "name": "pe",
-      "version_requirement": "3.x"
+      "version_requirement": ">= 2.7.0"
     },
     {
       "name": "puppet",
-      "version_requirement": "3.x"
+      "version_requirement": ">= 2.7.0"
     }
   ],
   "dependencies": [

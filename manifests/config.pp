@@ -58,8 +58,8 @@ class zookeeper::config {
     }
   }
 
-  case $::osfamily {
-    'RedHat',default: {
+  case "${::osfamily}-${::operatingsystem}" {
+    /RedHat-Fedora/,default: {
       if $myid and $myid != 0 {
         file { "${zookeeper::datadir}/myid":
           owner   => 'zookeeper',
@@ -73,7 +73,7 @@ class zookeeper::config {
         }
       }
     }
-    'Debian': {
+    /Debian|RedHat/: {
       if $myid and $myid != 0 {
         $args = "--myid ${myid}"
       } else {

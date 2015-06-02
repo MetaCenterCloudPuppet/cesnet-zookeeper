@@ -4,16 +4,14 @@
 # It sets variables according to platform.
 #
 class zookeeper::params {
-  case $::osfamily {
-    'RedHat': {
-      $alternatives = undef
+  case "${::osfamily}-${::operatingsystem}" {
+    /RedHat-Fedora/: {
       $packages = [ 'zookeeper' ]
       $daemon = 'zookeeper'
       $confdir = '/etc/zookeeper'
       $datadir = '/var/lib/zookeeper/data'
     }
-    'Debian': {
-      $alternatives = 'cluster'
+    /Debian|RedHat/: {
       $packages = [ 'zookeeper-server' ]
       $daemon = 'zookeeper-server'
       $confdir = '/etc/zookeeper/conf'
@@ -22,6 +20,13 @@ class zookeeper::params {
     default: {
       fail("${::osfamily} (${::operatingsystem}) not supported")
     }
+  }
+
+  $alternatives = "${::osfamily}-${::operatingsystem}" ? {
+    /RedHat-Fedora/ => undef,
+    /Debian/        => 'cluster',
+    # https://github.com/puppet-community/puppet-alternatives/issues/18
+    /RedHat/        => '',
   }
 
   $hostnames = undef

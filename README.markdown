@@ -31,7 +31,9 @@ Optionally the security based on Kerberos can be enabled.
 
 Supported are:
 
-* Debian 7/wheezy: Cloudera distribution (tested on Hadoop 2.5.0)
+* Debian 7/wheezy: Cloudera distribution (tested with CDH 5.3.0/zookeeper 3.4.5)
+* Ubuntu 14/trusty
+* RHEL 6, CentOS 6, Scientific Linux 6: Cloudera distribution (tested with CDH 5.4.2/zookeeper 3.4.5)
 
 <a name="setup"></a>
 ##Setup
