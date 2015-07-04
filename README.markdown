@@ -7,8 +7,7 @@
     * [Setup requirements](#setup-requirements)
     * [Beginning with Zookeeper](#beginning-with-zookeeeper)
 4. [Usage - Configuration options and additional functionality](#usage)
-    * [Enable Security](#security)
-    * [Multihome Support](#multihome)
+    * [Superuser Access](#superuser)
 5. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
     * [Classes](#classes)
     * [Module Parameters](#parameters)
@@ -95,6 +94,32 @@ Note: you can consider removing or changing property *zookeeper.security.auth\_t
     }
 
 Default value is valid for principal names according to Hadoop documentation at [http://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SecureMode.html](http://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-common/SecureMode.html) and it is needed only with cross-realm authentication.
+
+<a name="superuser"></a>
+###Superuser Access
+
+It is recommended to set super user credentials (for example to be able to restore bad ACLs).
+
+####Get the digest string:
+(replace $PASSWORD by real password)
+
+    export ZK_HOME=/usr/lib/zookeeper
+    java -cp $ZK_HOME/lib/*:$ZK_HOME/zookeeper.jar org.apache.zookeeper.server.auth.DigestAuthenticationProvider super:$PASSWORD
+
+####Use the digest in *properties*:
+
+    class{'zookeeper':
+      hostnames => [ $::fqdn ],
+      realm => 'MY.REALM',
+      properties => {
+        zookeeper.DigestAuthenticationProvider.superDigest => 'super:XXXXX',
+      },
+    }
+
+####Using in the client:
+
+    zooclient-cli
+      addauth digest super:PASSWORD
 
 <a name="reference"></a>
 ##Reference
