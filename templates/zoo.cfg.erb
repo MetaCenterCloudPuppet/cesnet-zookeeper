@@ -13,7 +13,6 @@ dataDir=<%= scope.lookupvar('zookeeper::datadir') %>
 clientPort=2181
 <% if scope.lookupvar('zookeeper::realm') and not scope.lookupvar('zookeeper::realm').empty? -%>
 # security
-authProvider.1=org.apache.zookeeper.server.auth.SASLAuthenticationProvider
 jaasLoginRenew=3600000
 kerberos.removeHostFromPrincipal=true
 kerberos.removeRealmFromPrincipal=true
