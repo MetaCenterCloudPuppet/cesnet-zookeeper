@@ -1,3 +1,7 @@
+## Apache Zookeeper Puppet Module
+
+![Build Status](https://travis-ci.org/MetaCenterCloudPuppet/cesnet-zookeeper.svg?branch=master)](https://travis-ci.org/MetaCenterCloudPuppet/cesnet-zookeeper)
+
 ####Table of Contents
 
 1. [Overview](#overview)
