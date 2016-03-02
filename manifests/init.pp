@@ -16,9 +16,9 @@
 #
 # Properties for zookeeper. "::undef" will remove a property set automatically by this module, empty string sets empty value.
 #
-# ####`realm` (required)
+# ####`realm` ''
 #
-#   Kerberos realm. Required parameter, empty string disables Kerberos authentication.a
+#   Kerberos realm. Empty string disables Kerberos authentication.
 #
 #   To enable security, there are required:
 #
@@ -28,11 +28,11 @@
 class zookeeper (
   $hostnames = $params::hostnames,
   $properties = undef,
-  $realm,
+  $realm = '',
 ) inherits zookeeper::params {
   include stdlib
 
-  if $realm {
+  if $realm and $realm != '' {
     $sec_properties = {
       'java.security.auth.login.config' => "${zookeeper::confdir}/jaas.conf",
       'zookeeper.security.auth_to_local' => "
@@ -48,6 +48,8 @@ RULE:[2:\$1;\$2@\$0](^HTTP;.*@${realm}$)s/^.*$/HTTP/
 DEFAULT
 ",
     }
+  } else {
+    $sec_properties = {}
   }
 
   $_properties = merge($sec_properties, $properties)

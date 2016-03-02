@@ -74,7 +74,6 @@ Be aware of:
 
     class{'zookeeper':
       hostnames => [ $::fqdn ],
-      realm => '',
     }
 
 It is recommended to have at least three or more (odd-numbered) zookeeper machines. All zookeeper hostnames must be specified in *hostnames* and the order must be the same across all of the nodes.
@@ -148,9 +147,9 @@ Use alternatives to switch configuration. Use only when supported (Cloudera for 
 
 Array of zookeeper nodes hostnames.
 
-####`realm` (required)
+####`realm` ''
 
-  Kerberos realm. Required parameter, empty string disables Kerberos authentication.a
+  Kerberos realm. Empty string disables Kerberos authentication.
 
   To enable security, there are required:
 

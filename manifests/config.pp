@@ -25,7 +25,7 @@ class zookeeper::config {
   $keytab = '/etc/security/keytab/zookeeper.service.keytab'
   $principal = "zookeeper/${::fqdn}@${zookeeper::realm}"
 
-  if $zookeeper::realm {
+  if $zookeeper::realm and $zookeeper::realm!= '' {
     file { $keytab:
       owner => 'zookeeper',
       group => 'zookeeper',
@@ -86,7 +86,7 @@ class zookeeper::config {
         user    => 'zookeeper',
         require => [ File['zoo-cfg'], ],
       }
-      if $zookeeper::realm {
+      if $zookeeper::realm and $zookeeper::realm != '' {
         File[$keytab] -> Exec['zookeeper-init']
         File["${zookeeper::confdir}/jaas.conf"] -> Exec['zookeeper-init']
         File["${zookeeper::confdir}/java.env"] -> Exec['zookeeper-init']
