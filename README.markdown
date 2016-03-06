@@ -1,42 +1,33 @@
 ## Apache Zookeeper Puppet Module
 
-![Build Status](https://travis-ci.org/MetaCenterCloudPuppet/cesnet-zookeeper.svg?branch=master)](https://travis-ci.org/MetaCenterCloudPuppet/cesnet-zookeeper)
+[![Build Status](https://travis-ci.org/MetaCenterCloudPuppet/cesnet-zookeeper.svg?branch=master)](https://travis-ci.org/MetaCenterCloudPuppet/cesnet-zookeeper)
 
 ####Table of Contents
 
-1. [Overview](#overview)
-2. [Module Description - What the module does and why it is useful](#module-description)
-3. [Setup - The basics of getting started with Zookeeper](#setup)
+1. [Module Description - What the module does and why it is useful](#module-description)
+2. [Setup - The basics of getting started with Zookeeper](#setup)
     * [What cesnet-zookeeper module affects](#what-zookeeepr-affects)
     * [Setup requirements](#setup-requirements)
     * [Beginning with Zookeeper](#beginning-with-zookeeeper)
-4. [Usage - Configuration options and additional functionality](#usage)
+3. [Usage - Configuration options and additional functionality](#usage)
     * [Superuser Access](#superuser)
-5. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
+4. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
     * [Classes](#classes)
-    * [Module Parameters](#parameters)
-6. [Development - Guide for contributing to the module](#development)
-
-
-1. [Overview](#overview)
-
-<a name="overview"></a>
-## Overview
-
-The zookeeper module installs and configures Apache Zookeeper quorum cluster. Optionally, the security can be enabled.
+    * [Module Parameters (zookeeper class)](#parameters)
+5. [Development - Guide for contributing to the module](#development)
 
 <a name="module-description"></a>
 ##Module Description
 
-This module install and configure Apache Zookeeper quorum cluster. It expects list of hostnames, where zookeeper should be running. Zookeeper IDs will be generated according to the ordering of these hostnames.
+This module installs and configures Apache Zookeeper quorum cluster. It expects list of hostnames, where zookeeper should be running. Zookeeper IDs will be generated according to the ordering of these hostnames.
 
 Optionally the security based on Kerberos can be enabled.
 
 Supported are:
 
-* Debian 7/wheezy: Cloudera distribution (tested with CDH 5.3.0/zookeeper 3.4.5)
-* Ubuntu 14/trusty
-* RHEL 6, CentOS 6, Scientific Linux 6: Cloudera distribution (tested with CDH 5.4.2/zookeeper 3.4.5)
+* **Debian 7/wheezy**: Cloudera distribution (tested with CDH 5.3.0/5.5.1, Zookeeper 3.4.5)
+* **Ubuntu 14/trusty**
+* **RHEL 6/7 and clones**: Cloudera distribution (tested with CDH 5.4.2, Zookeeper 3.4.5)
 
 <a name="setup"></a>
 ##Setup
@@ -76,7 +67,7 @@ Be aware of:
       hostnames => [ $::fqdn ],
     }
 
-It is recommended to have at least three or more (odd-numbered) zookeeper machines. All zookeeper hostnames must be specified in *hostnames* and the order must be the same across all of the nodes.
+It is recommended to have at least three or more (odd-numbered) zookeeper machines. All zookeeper hostnames must be specified in *hostnames* and the order must be the same across all the nodes.
 
 <a name="usage"></a>
 ##Usage
@@ -85,7 +76,7 @@ It is recommended to have at least three or more (odd-numbered) zookeeper machin
 
     class{'zookeeper':
       hostnames => [ $::fqdn ],
-      realm => 'MY.REALM',
+      realm     => 'MY.REALM',
     }
 
 The keytab file must be available at */etc/security/keytabs/zookeeper.service.keytab*.
@@ -112,8 +103,8 @@ It is recommended to set super user credentials (for example to be able to resto
 ####Use the digest in *properties*:
 
     class{'zookeeper':
-      hostnames => [ $::fqdn ],
-      realm => 'MY.REALM',
+      hostnames  => [ $::fqdn ],
+      realm      => 'MY.REALM',
       properties => {
         zookeeper.DigestAuthenticationProvider.superDigest => 'super:XXXXX',
       },
@@ -130,35 +121,41 @@ It is recommended to set super user credentials (for example to be able to resto
 <a name="classes"></a>
 ###Classes
 
-* config.pp
-* **init.pp**: Setup Zookeeper Cluster
-* install.pp
-* params.pp
-* service.pp
+* [**`zookeeper`**](#parameters): Setup Zookeeper Cluster
+* `zookeeper::config`
+* `zookeeper::install`
+* `zookeeper::params`
+* `zookeeper::service`
 
 <a name="parameters"></a>
 ###Module Parameters
 
 ####`alternatives`
 
-Use alternatives to switch configuration. Use only when supported (Cloudera for example).
+Switches the alternatives used for the configuration. Default: 'cluster' (Debian) or undef.
 
-####`hostnames` (empty)
+It can be used only when supported (for example with Cloudera distribution).
 
-Array of zookeeper nodes hostnames.
+####`hostnames`
 
-####`realm` ''
+Array of zookeeper nodes hostnames. Default: undef.
 
-  Kerberos realm. Empty string disables Kerberos authentication.
+####`realm`
 
-  To enable security, there are required:
+Enables security and specifies Kerberos realm to use. Default: ''.
 
-  * configured Kerberos (/etc/krb5.conf, /etc/krb5.keytab)
-  * /etc/security/keytab/zookeeper.service.keytab (on zookeeper nodes)
+Empty string disables the security.
+
+With enabled security there are required:
+
+  * configured Kerberos (*/etc/krb5.conf*)
+  * */etc/security/keytab/zookeeper.service.keytab* (on zookeeper nodes)
 
 <a name="development"></a>
 ##Development
 
 * Repository: [https://github.com/MetaCenterCloudPuppet/cesnet-zookeeper](https://github.com/MetaCenterCloudPuppet/cesnet-zookeeper)
-* Tests: [https://github.com/MetaCenterCloudPuppet/hadoop-tests](https://github.com/MetaCenterCloudPuppet/hadoop-tests)
+* Tests:
+ * basic: see *.travis.yml*
+ * vagrant: [https://github.com/MetaCenterCloudPuppet/hadoop-tests](https://github.com/MetaCenterCloudPuppet/hadoop-tests)
 * Email: František Dvořák &lt;valtri@civ.zcu.cz&gt;

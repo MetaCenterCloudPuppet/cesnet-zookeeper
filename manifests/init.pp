@@ -2,29 +2,6 @@
 #
 # Setup Zookeeper Cluster.
 #
-# === Parameters
-#
-# ####`alternatives`
-#
-# Use alternatives to switch configuration. Use only when supported (Cloudera for example).
-#
-# ####`hostnames` (empty)
-#
-# Array of zookeeper nodes hostnames.
-#
-# ####`properties` undef
-#
-# Properties for zookeeper. "::undef" will remove a property set automatically by this module, empty string sets empty value.
-#
-# ####`realm` ''
-#
-#   Kerberos realm. Empty string disables Kerberos authentication.
-#
-#   To enable security, there are required:
-#
-#   * configured Kerberos (/etc/krb5.conf, /etc/krb5.keytab)
-#   * /etc/security/keytab/zookeeper.service.keytab (on zookeeper nodes)
-#
 class zookeeper (
   $hostnames = $params::hostnames,
   $properties = undef,
