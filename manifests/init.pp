@@ -7,7 +7,7 @@ class zookeeper (
   $properties = undef,
   $realm = '',
 ) inherits zookeeper::params {
-  include stdlib
+  include ::stdlib
 
   if $realm and $realm != '' {
     $sec_properties = {
@@ -31,9 +31,9 @@ DEFAULT
 
   $_properties = merge($sec_properties, $properties)
 
-  include 'zookeeper::install'
-  include 'zookeeper::config'
-  include 'zookeeper::service'
+  include ::zookeeper::install
+  include ::zookeeper::config
+  include ::zookeeper::service
 
   Class['zookeeper::install'] ->
   Class['zookeeper::config'] ~>

@@ -3,7 +3,7 @@
 # Installs zookeeper node.
 #
 class zookeeper::install {
-  include stdlib
+  include ::stdlib
 
   $confname = $zookeeper::alternatives
 
