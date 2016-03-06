@@ -28,9 +28,4 @@ class zookeeper::params {
     # https://github.com/puppet-community/puppet-alternatives/issues/18
     /RedHat/        => '',
   }
-
-  $hostnames = undef
-
-  $features = {
-  }
 }

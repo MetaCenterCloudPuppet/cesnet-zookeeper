@@ -3,7 +3,7 @@
 # Setup Zookeeper Cluster.
 #
 class zookeeper (
-  $hostnames = $params::hostnames,
+  $hostnames = undef,
   $properties = undef,
   $realm = '',
 ) inherits zookeeper::params {
