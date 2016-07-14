@@ -3,17 +3,6 @@
 # Zookeeper configuration.
 #
 class zookeeper::config {
-  if $zookeeper::hostnames {
-    $myid = array_search($zookeeper::hostnames, $::fqdn)
-  } else {
-    $myid = undef
-  }
-  notice("myid: ${myid}")
-
-  if !$myid or $myid == 0 {
-    notice("Missing myid! Zookeeper server ${::fqdn} not in zookeeper::hostnames list.")
-  }
-
   file { "${zookeeper::confdir}/zoo.cfg":
     owner   => 'root',
     group   => 'root',
@@ -60,7 +49,7 @@ class zookeeper::config {
 
   case "${::osfamily}-${::operatingsystem}" {
     /RedHat-Fedora/,default: {
-      if $myid and $myid != 0 {
+      if $zookeeper::_myid and $zookeeper::_myid != 0 {
         file { "${zookeeper::datadir}/myid":
           owner   => 'zookeeper',
           group   => 'zookeeper',
@@ -68,14 +57,14 @@ class zookeeper::config {
           replace => false,
           # lint:ignore:only_variable_string
           # (needed to convert integer to string)
-          content => "${myid}",
+          content => "${zookeeper::_myid}",
           # lint:endignore
         }
       }
     }
     /Debian|RedHat/: {
-      if $myid and $myid != 0 {
-        $args = "--myid ${myid}"
+      if $zookeeper::_myid and $zookeeper::_myid != 0 {
+        $args = "--myid ${zookeeper::_myid}"
       } else {
         $args = ''
       }

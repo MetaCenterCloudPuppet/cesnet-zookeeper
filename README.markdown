@@ -140,6 +140,14 @@ It can be used only when supported (for example with Cloudera distribution).
 
 Array of zookeeper nodes hostnames. Default: undef.
 
+####`myid`
+
+ID of zookeeper server in the quorum. Default: undef (=autodetect).
+
+*myid* is the ID number of the zookeeper server in the quorum. It's the number starting from 1 and it must be unique for each node.
+
+By default, the ID is the order generated automatically as order of the node hostname (*::fqdn*) in the *hostnames* array.
+
 ####`realm`
 
 Enables security and specifies Kerberos realm to use. Default: ''.

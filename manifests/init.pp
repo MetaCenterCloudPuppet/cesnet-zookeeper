@@ -5,10 +5,26 @@
 class zookeeper (
   $hostnames = undef,
   $alternatives = '::default',
+  $myid = undef,
   $properties = undef,
   $realm = '',
 ) inherits zookeeper::params {
   include ::stdlib
+
+  if !$myid {
+    if $hostnames {
+      $_myid = array_search($hostnames, $::fqdn)
+    } else {
+      $_myid = undef
+    }
+  } else {
+    $_myid = $myid
+  }
+  notice("myid: ${_myid}")
+
+  if !$_myid or $_myid == 0 {
+    notice("Missing myid and zookeeper server ${::fqdn} not in zookeeper::hostnames list.")
+  }
 
   if $realm and $realm != '' {
     $sec_properties = {
