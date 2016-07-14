@@ -21,11 +21,4 @@ class zookeeper::params {
       fail("${::osfamily} (${::operatingsystem}) not supported")
     }
   }
-
-  $alternatives = "${::osfamily}-${::operatingsystem}" ? {
-    /RedHat-Fedora/ => undef,
-    /Debian/        => 'cluster',
-    # https://github.com/puppet-community/puppet-alternatives/issues/18
-    /RedHat/        => '',
-  }
 }

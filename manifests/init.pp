@@ -4,6 +4,7 @@
 #
 class zookeeper (
   $hostnames = undef,
+  $alternatives = '::default',
   $properties = undef,
   $realm = '',
 ) inherits zookeeper::params {
