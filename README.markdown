@@ -1,6 +1,6 @@
 ## Apache Zookeeper Puppet Module
 
-[![Build Status](https://travis-ci.org/MetaCenterCloudPuppet/cesnet-zookeeper.svg?branch=master)](https://travis-ci.org/MetaCenterCloudPuppet/cesnet-zookeeper)
+[![Build Status](https://travis-ci.org/MetaCenterCloudPuppet/cesnet-zookeeper.svg?branch=master)](https://travis-ci.org/MetaCenterCloudPuppet/cesnet-zookeeper) [![Puppet Forge](https://img.shields.io/puppetforge/v/cesnet/zookeeper.svg)](https://forge.puppetlabs.com/cesnet/zookeeper)
 
 ####Table of Contents
 
@@ -25,7 +25,7 @@ Optionally the security based on Kerberos can be enabled.
 
 Supported are:
 
-* **Debian 7/wheezy**: Cloudera distribution (tested with CDH 5.3.0/5.5.1, Zookeeper 3.4.5)
+* **Debian 7/wheezy**: Cloudera distribution (tested with CDH 5.3.0/5.5.1/5.7.1, Zookeeper 3.4.5)
 * **Ubuntu 14/trusty**
 * **RHEL 6/7 and clones**: Cloudera distribution (tested with CDH 5.4.2, Zookeeper 3.4.5)
 
