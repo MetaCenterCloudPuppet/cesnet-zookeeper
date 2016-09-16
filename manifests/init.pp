@@ -8,6 +8,8 @@ class zookeeper (
   $myid = undef,
   $properties = undef,
   $realm = '',
+  $autopurge_purge_interval = undef,
+  $autopurge_snap_retain_count = undef
 ) inherits zookeeper::params {
   include ::stdlib
 
