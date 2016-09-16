@@ -12,10 +12,10 @@ dataDir=<%= scope.lookupvar('zookeeper::datadir') %>
 # the port at which the clients will connect
 clientPort=2181
 <% if scope.lookupvar('zookeeper::autopurge_purge_interval') -%>
-autopurge.purgeInterval=<%= scope.lookupvar('zookeeper::autopurge_purge_interval') -%>
+autopurge.purgeInterval=<%= scope.lookupvar('zookeeper::autopurge_purge_interval') %>
 <% end -%>
 <% if scope.lookupvar('zookeeper::autopurge_snap_retain_count') -%>
-autopurge.snapRetainCount=<%= scope.lookupvar('zookeeper::autopurge_snap_retain_count') -%>
+autopurge.snapRetainCount=<%= scope.lookupvar('zookeeper::autopurge_snap_retain_count') %>
 <% end -%>
 <% if scope.lookupvar('zookeeper::realm') and not scope.lookupvar('zookeeper::realm').empty? -%>
 # security
