@@ -30,7 +30,7 @@ $test_os=[{
   }, {
     'osfamily' => 'RedHat',
     'operatingsystem' => 'CentOS',
-    'operatingsystemrelease' => ['6']
+    'operatingsystemrelease' => ['7']
   }]
 
 $test_config_dir={
