@@ -1,11 +1,11 @@
 {
   "name": "cesnet-zookeeper",
-  "version": "0.9.9",
+  "version": "0.10.0",
   "author": "Frantisek Dvorak <valtri@civ.zcu.cz>",
   "summary": "Zookeeper cluster with security",
   "license": "MIT",
   "source": "https://github.com/MetaCenterCloudPuppet/cesnet-zookeeper",
-  "project_page": "https://github.com/MetaCenterCloudPuppet",
+  "project_page": "https://github.com/MetaCenterCloudPuppet/cesnet-zookeeper",
   "issues_url": "https://github.com/MetaCenterCloudPuppet/cesnet-zookeeper/issues",
   "tags": [
     "hadoop",
@@ -18,7 +18,7 @@
     },
     {
       "operatingsystem": "Debian",
-      "operatingsystemrelease": ["7"]
+      "operatingsystemrelease": ["7", "8"]
     },
     {
       "operatingsystem": "RedHat",
