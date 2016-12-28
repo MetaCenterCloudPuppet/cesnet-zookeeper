@@ -146,7 +146,13 @@ ID of zookeeper server in the quorum. Default: undef (=autodetect).
 
 *myid* is the ID number of the zookeeper server in the quorum. It's the number starting from 1 and it must be unique for each node.
 
-By default, the ID is the order generated automatically as order of the node hostname (*::fqdn*) in the *hostnames* array.
+By default, the ID is generated automatically as order of the node hostname (*::fqdn*) in the *hostnames* array.
+
+####`properties`
+
+Generic properties to be set for the zookeeper cluster. Default: undef.
+
+Some properties are set automatically, "::undef" string explicitly removes given property. Empty string sets the empty value.
 
 ####`realm`
 
