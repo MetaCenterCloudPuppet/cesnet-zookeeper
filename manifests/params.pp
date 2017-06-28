@@ -12,7 +12,8 @@ class zookeeper::params {
       $datadir = '/var/lib/zookeeper/data'
     }
     /Debian|RedHat/: {
-      $packages = [{'zookeeper' => { ensure => '3.4.5+cdh5.3.3+84-1.cdh5.3.3.p0.8~wheezy-cdh5.3.3' }}, 'zookeeper-server' ]
+      $preinstall_pinned_zookeeper = true
+      $packages = ['zookeeper-server']
       $daemon = 'zookeeper-server'
       $confdir = '/etc/zookeeper/conf'
       $datadir = '/var/lib/zookeeper'
