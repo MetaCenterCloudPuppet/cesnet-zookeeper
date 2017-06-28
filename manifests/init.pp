@@ -52,8 +52,8 @@ DEFAULT
   include ::zookeeper::config
   include ::zookeeper::service
 
-  Class['zookeeper::install'] ->
-  Class['zookeeper::config'] ~>
-  Class['zookeeper::service'] ->
-  Class['zookeeper']
+  Class['zookeeper::install']
+  -> Class['zookeeper::config']
+  ~> Class['zookeeper::service']
+  -> Class['zookeeper']
 }
