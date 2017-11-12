@@ -23,9 +23,10 @@ This module installs and configures Apache Zookeeper quorum cluster. It expects 
 
 Optionally the security based on Kerberos can be enabled.
 
-Supported are:
+Tested on:
 
 * **Debian 7/wheezy**: Cloudera distribution (tested with CDH 5.3.0/5.5.1/5.7.1, Zookeeper 3.4.5)
+* **Debian 8/jessie**: BigTop distribution (BigTop 1.2.0, Zookeeper 3.4.6)
 * **Ubuntu 14/trusty**
 * **RHEL 6/7 and clones**: Cloudera distribution (tested with CDH 5.4.2, Zookeeper 3.4.5)
 
