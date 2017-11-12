@@ -1,5 +1,5 @@
 name 'cesnet-zookeeper'
-version '0.10.0'
+version '0.11.0'
 source 'https://github.com/MetaCenterCloudPuppet/cesnet-zookeeper'
 author 'Frantisek Dvorak <valtri@civ.zcu.cz>'
 license 'MIT'
