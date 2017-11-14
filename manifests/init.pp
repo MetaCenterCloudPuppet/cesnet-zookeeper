@@ -36,6 +36,7 @@ RULE:[2:\$1;\$2@\$0]([rn]m;.*@${realm})s/^.*$/yarn/
 RULE:[2:\$1;\$2@\$0](hbase;.*@${realm})s/^.*$/hbase/
 RULE:[2:\$1;\$2@\$0](hive;.*@${realm})s/^.*$/hive/
 RULE:[2:\$1;\$2@\$0](hue;.*@${realm})s/^.*$/hue/
+RULE:[2:\$1;\$2@\$0](kafka;.*@${realm})s/^.*$/kafka/
 RULE:[2:\$1;\$2@\$0](tomcat;.*@${realm})s/^.*$/tomcat/
 RULE:[2:\$1;\$2@\$0](zookeeper;.*@${realm})s/^.*$/zookeeper/
 RULE:[2:\$1;\$2@\$0](HTTP;.*@${realm})s/^.*$/HTTP/
