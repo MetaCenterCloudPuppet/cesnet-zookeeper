@@ -67,6 +67,7 @@ Be aware of:
     class{'zookeeper':
       hostnames => [ $::fqdn ],
     }
+    include ::zookeeper::server
 
 It is recommended to have at least three or more (odd-numbered) zookeeper machines. All zookeeper hostnames must be specified in *hostnames* and the order must be the same across all the nodes.
 
@@ -79,6 +80,7 @@ It is recommended to have at least three or more (odd-numbered) zookeeper machin
       hostnames => [ $::fqdn ],
       realm     => 'MY.REALM',
     }
+    include ::zookeeper::server
 
 The keytab file must be available at */etc/security/keytabs/zookeeper.service.keytab*.
 
@@ -110,6 +112,7 @@ It is recommended to set super user credentials (for example to be able to resto
         zookeeper.DigestAuthenticationProvider.superDigest => 'super:XXXXX',
       },
     }
+    include ::zookeeper::server
 
 ####Using in the client:
 
@@ -122,11 +125,18 @@ It is recommended to set super user credentials (for example to be able to resto
 <a name="classes"></a>
 ###Classes
 
-* [**`zookeeper`**](#parameters): Setup Zookeeper Cluster
-* `zookeeper::config`
-* `zookeeper::install`
-* `zookeeper::params`
-* `zookeeper::service`
+* [**`zookeeper`**](#parameters): Configuration class for Zookeeper
+* **`zookeeper::client`**: Zookeeper client
+* `zookeeper::client::config`: Zookeeper client configuration
+* `zookeeper::client::install`: Zookeeper client installation
+* `zookeeper::client::service`: Stub class
+* `zookeeper::common::config`: Zookeeper common configuration
+* `zookeeper::common::postinstall`: Preparation steps after installation
+* `zookeeper::params`: Zookeeper module parameters
+* **`zookeeper::server`**: Zookeeper node
+* `zookeeper::server::config`: Zookeeper server configuration
+* `zookeeper::server::install`: Zookeeper node installation
+* `zookeeper::server::service`: Launch zookeeper service
 
 <a name="parameters"></a>
 ###Module Parameters

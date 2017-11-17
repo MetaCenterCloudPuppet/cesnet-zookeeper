@@ -1,18 +1,24 @@
 # == Class zookeeper::params
 #
-# This class is meant to be called from zookeeper.
+# Zookeeper module parameters.
 # It sets variables according to platform.
 #
 class zookeeper::params {
   case "${::osfamily}-${::operatingsystem}" {
     /RedHat-Fedora/: {
-      $packages = [ 'zookeeper' ]
+      $packages = {
+        'client' => [ 'zookeeper' ],
+        'server' => [ 'zookeeper' ],
+      }
       $daemon = 'zookeeper'
       $confdir = '/etc/zookeeper'
       $datadir = '/var/lib/zookeeper/data'
     }
     /Debian|RedHat/: {
-      $packages = [ 'zookeeper-server' ]
+      $packages = {
+        'client' => [ 'zookeeper' ],
+        'server' => [ 'zookeeper-server' ],
+      }
       $daemon = 'zookeeper-server'
       $confdir = '/etc/zookeeper/conf'
       $datadir = '/var/lib/zookeeper'

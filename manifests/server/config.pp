@@ -1,8 +1,10 @@
-# == Class: zookeeper::config
+# == Class: zookeeper::server:::config
 #
-# Zookeeper configuration.
+# Zookeeper server configuration.
 #
-class zookeeper::config {
+class zookeeper::server::config {
+  include ::zookeeper::common::config
+
   file { "${zookeeper::confdir}/zoo.cfg":
     owner   => 'root',
     group   => 'root',
@@ -19,31 +21,6 @@ class zookeeper::config {
       owner => 'zookeeper',
       group => 'zookeeper',
       mode  => '0400',
-    }
-
-    file { "${zookeeper::confdir}/jaas.conf":
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0644',
-      content => template('zookeeper/jaas.conf.erb'),
-    }
-  } else {
-    file { "${zookeeper::confdir}/jaas.conf":
-      ensure => 'absent',
-    }
-  }
-
-  if $zookeeper::_properties {
-    file { "${zookeeper::confdir}/java.env":
-      ensure  => 'present',
-      owner   => 'root',
-      group   => 'root',
-      mode    => '0644',
-      content => template('zookeeper/java.env.erb'),
-    }
-  } else {
-    file { "${zookeeper::confdir}/java.env":
-      ensure => 'absent',
     }
   }
 

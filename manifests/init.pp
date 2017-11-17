@@ -1,6 +1,6 @@
 # == Class: zookeeper
 #
-# Setup Zookeeper Cluster.
+# Configuration class for Zookeeper.
 #
 class zookeeper (
   $hostnames = undef,
@@ -48,13 +48,4 @@ DEFAULT
   }
 
   $_properties = merge($sec_properties, $properties)
-
-  include ::zookeeper::install
-  include ::zookeeper::config
-  include ::zookeeper::service
-
-  Class['zookeeper::install']
-  -> Class['zookeeper::config']
-  ~> Class['zookeeper::service']
-  -> Class['zookeeper']
 }
