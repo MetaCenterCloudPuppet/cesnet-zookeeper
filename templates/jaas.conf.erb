@@ -6,3 +6,8 @@ Server {
   useTicketCache=false
   principal="zookeeper/<%= @fqdn -%>@<%= scope.lookupvar('zookeeper::realm') -%>";
 };
+
+Client {
+  com.sun.security.auth.module.Krb5LoginModule required
+  useTicketCache=true;
+};
