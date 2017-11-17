@@ -8,4 +8,4 @@ description 'Zookeeper cluster with security'
 project_page 'https://github.com/MetaCenterCloudPuppet/cesnet-zookeeper'
 
 dependency 'puppetlabs/stdlib', '>= 1.0.0 <5.0.0'
-dependency 'cesnet/hadoop_lib', '<1.0.0'
+dependency 'cesnet/hadoop_lib', '>= 0.3.0 <1.0.0'
