@@ -1,6 +1,6 @@
 {
   "name": "cesnet-zookeeper",
-  "version": "0.11.0",
+  "version": "1.0.0",
   "author": "Frantisek Dvorak <valtri@civ.zcu.cz>",
   "summary": "Zookeeper cluster with security",
   "license": "MIT",
@@ -18,7 +18,7 @@
     },
     {
       "operatingsystem": "Debian",
-      "operatingsystemrelease": ["7", "8"]
+      "operatingsystemrelease": ["7", "8", "9"]
     },
     {
       "operatingsystem": "RedHat",
@@ -30,7 +30,7 @@
     },
     {
       "operatingsystem": "Ubuntu",
-      "operatingsystemrelease": ["14.04"]
+      "operatingsystemrelease": ["14.04", "16.04"]
     }
   ],
   "requirements": [
