@@ -3,7 +3,7 @@
 # Zookeeper server configuration.
 #
 class zookeeper::server::config {
-  contain ::zookeeper::common::config
+  contain zookeeper::common::config
 
   file { "${zookeeper::confdir}/zoo.cfg":
     owner   => 'root',
