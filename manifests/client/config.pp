@@ -3,5 +3,5 @@
 # Zookeeper client configuration.
 #
 class zookeeper::client::config {
-  include ::zookeeper::common::config
+  contain zookeeper::common::config
 }

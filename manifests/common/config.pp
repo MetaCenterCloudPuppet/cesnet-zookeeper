@@ -3,7 +3,10 @@
 # Zookeeper common configuration.
 #
 class zookeeper::common::config {
-  if $zookeeper::realm and $zookeeper::realm!= '' {
+  $keytab = $zookeeper::keytab
+  $principal = $zookeeper::_principal
+
+  if $zookeeper::realm and $zookeeper::realm != '' {
     file { "${zookeeper::confdir}/jaas.conf":
       owner   => 'root',
       group   => 'root',

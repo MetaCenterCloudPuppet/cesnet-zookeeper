@@ -27,4 +27,8 @@ class zookeeper::params {
       fail("${::osfamily} (${::operatingsystem}) not supported")
     }
   }
+
+  $keytab = '/etc/security/keytab/zookeeper.service.keytab'
+  # see $_principal in init.pp
+  #$principal = "zookeeper/${::fqdn}@${zookeeper::realm}"
 }

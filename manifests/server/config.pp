@@ -3,7 +3,7 @@
 # Zookeeper server configuration.
 #
 class zookeeper::server::config {
-  include ::zookeeper::common::config
+  contain ::zookeeper::common::config
 
   file { "${zookeeper::confdir}/zoo.cfg":
     owner   => 'root',
@@ -14,7 +14,6 @@ class zookeeper::server::config {
   }
 
   $keytab = '/etc/security/keytab/zookeeper.service.keytab'
-  $principal = "zookeeper/${::fqdn}@${zookeeper::realm}"
 
   if $zookeeper::realm and $zookeeper::realm!= '' {
     file { $keytab:

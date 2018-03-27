@@ -165,6 +165,14 @@ Generic properties to be set for the zookeeper cluster. Default: undef.
 
 Some properties are set automatically, "::undef" string explicitly removes given property. Empty string sets the empty value.
 
+####`keytab`
+
+Server keytab file. Default: '/etc/security/keytab/zookeeper.service.keytab'.
+
+####`principal`
+
+Server principal. Default: "zookeeper/${::fqdn}@${realm}".
+
 ####`realm`
 
 Enables security and specifies Kerberos realm to use. Default: ''.

@@ -7,6 +7,8 @@ class zookeeper (
   $alternatives = '::default',
   $myid = undef,
   $properties = undef,
+  $keytab = $::zookeeper::params::keytab,
+  $principal = undef,
   $realm = '',
 ) inherits zookeeper::params {
   include ::stdlib
@@ -27,6 +29,11 @@ class zookeeper (
   }
 
   if $realm and $realm != '' {
+    if ($principal) {
+      $_principal = $principal
+    } else {
+      $_principal = "zookeeper/${::fqdn}@${realm}"
+    }
     $sec_properties = {
       'java.security.auth.login.config' => "${zookeeper::confdir}/jaas.conf",
       'zookeeper.security.auth_to_local' => "
@@ -44,6 +51,7 @@ DEFAULT
 ",
     }
   } else {
+    $_principal = $principal
     $sec_properties = {}
   }
 
