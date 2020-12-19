@@ -22,11 +22,6 @@ class zookeeper (
   } else {
     $_myid = $myid
   }
-  notice("myid: ${_myid}")
-
-  if !$_myid or $_myid == 0 {
-    notice("Missing myid and zookeeper server ${::fqdn} not in zookeeper::hostnames list.")
-  }
 
   if $realm and $realm != '' {
     if ($principal) {

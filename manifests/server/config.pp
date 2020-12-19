@@ -5,6 +5,11 @@
 class zookeeper::server::config {
   contain zookeeper::common::config
 
+  notice("myid: ${zookeeper::_myid}")
+  if !$zookeeper::_myid or $zookeeper::_myid == 0 {
+    notice("Missing myid and zookeeper server ${::fqdn} not in zookeeper::hostnames list.")
+  }
+
   file { "${zookeeper::confdir}/zoo.cfg":
     owner   => 'root',
     group   => 'root',
