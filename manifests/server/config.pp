@@ -15,7 +15,6 @@ class zookeeper::server::config {
     group   => 'root',
     mode    => '0644',
     content => template('zookeeper/zoo.cfg.erb'),
-    alias   => 'zoo-cfg',
   }
 
   $keytab = '/etc/security/keytab/zookeeper.service.keytab'
@@ -57,7 +56,7 @@ class zookeeper::server::config {
         creates => "${zookeeper::datadir}/version-2",
         path    => '/sbin:/usr/sbin:/bin:/usr/bin',
         user    => 'zookeeper',
-        require => [ File['zoo-cfg'], ],
+        require => [ File["${zookeeper::confdir}/zoo.cfg"], ],
       }
       if $zookeeper::_myid and $zookeeper::_myid != 0 {
         # try the proper init first
