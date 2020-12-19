@@ -5,7 +5,7 @@
 class zookeeper::server::config {
   contain zookeeper::common::config
 
-  notice("myid: ${zookeeper::_myid}")
+  notice("myid: ${::zookeeper::_myid}")
   if !$zookeeper::_myid or $zookeeper::_myid == 0 {
     notice("Missing myid and zookeeper server ${::fqdn} not in zookeeper::hostnames list.")
   }
@@ -37,7 +37,7 @@ class zookeeper::server::config {
       replace => false,
       # lint:ignore:only_variable_string
       # (needed to convert integer to string)
-      content => "${zookeeper::_myid}",
+      content => "${::zookeeper::_myid}",
       # lint:endignore
     }
   }
@@ -47,7 +47,7 @@ class zookeeper::server::config {
     }
     /Debian|RedHat/: {
       if $zookeeper::_myid and $zookeeper::_myid != 0 {
-        $args = "--myid ${zookeeper::_myid}"
+        $args = "--myid ${::zookeeper::_myid}"
       } else {
         $args = ''
       }
